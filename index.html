@@ -1,1 +1,444 @@
-VisPLA
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViSPLA: Visual Iterative Self-Prompting for Language-Guided 3D Affordance Learning</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  
+  <!-- CSS Frameworks (Bulma) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.4/dist/css/bulma-slider.min.css">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- Image Compare Viewer CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/image-compare-viewer/dist/image-compare-viewer.min.css">
+
+  <style>
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      background-color: #fcfcfc;
+    }
+    
+    .hero {
+      background-color: #f5f5f5;
+    }
+
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: #363636;
+    }
+
+    .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+      color: #4a4a4a;
+      margin-top: 10px;
+    }
+
+    .author-block {
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+    .link-block a {
+      text-decoration: none;
+    }
+
+    .teaser .hero-body {
+      padding-top: 0;
+      padding-bottom: 3rem;
+    }
+
+    .teaser img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .abstract-text {
+      text-align: justify;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .method-section {
+      background-color: #ffffff;
+      padding: 3rem 0;
+    }
+
+    .method-card {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      height: 100%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    
+    .method-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .results-section {
+      padding: 3rem 0;
+    }
+
+    .comparison-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .bibtex-section pre {
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      padding: 15px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      background-color: #f5f5f5;
+      padding: 3rem 1.5rem 3rem;
+    }
+
+    /* Custom color for title highlight */
+    .title-highlight {
+      color: #d32f2f; /* Dark red/maroon to match generic academic themes */
+    }
+
+    /* Styles for images */
+    .responsive-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: block;
+      margin: 0 auto;
+    }
+    
+    .teaser-img {
+      max-width: 800px; /* Limits teaser width specifically */
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            
+            <h1 class="title is-1 publication-title">
+              <span class="title-highlight">ViSPLA</span>: Visual Iterative Self-Prompting for Language-Guided 3D Affordance Learning
+            </h1>
+            
+            <div class="is-size-4 publication-authors">
+              <span class="author-block">
+                <a href="mailto:hbasak@cs.stonybrook.edu">Hritam Basak</a>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:zyin@cs.stonybrook.edu">Zhaozheng Yin</a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Department of Computer Science, Stony Brook University</span>
+            </div>
+
+            <div class="is-size-4 publication-authors">
+              <span class="tag is-dark is-medium">NeurIPS 2025</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                
+                <!-- Code Link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                
+                <!-- Project Page Link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-globe"></i></span>
+                    <span>Project Page</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser Section -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        
+        <!-- TEASER IMAGE -->
+        <!-- Replace 'src' with your image file path (e.g., "images/teaser.png") -->
+        <img class="responsive-img teaser-img" src="imgs/Difference.png" alt="Teaser Image">
+        
+        <br>
+        <h2 class="subtitle has-text-centered">
+          <span style="font-weight: bold;">ViSPLA</span> redefines affordance detection as an iterative, language-conditioned segmentation task. Unlike single-pass methods, we use geometric feedback from the current prediction to prompt and refine the next step.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content abstract-text">
+            <p>
+              We address the problem of language-guided 3D affordance prediction, a core capability for embodied agents interacting with unstructured environments. Existing methods often rely on fixed affordance categories or require external expert prompts, limiting their ability to generalize across different objects and interpret multi-step instructions. 
+            </p>
+            <p>
+              In this work, we introduce <strong>ViSPLA</strong>, a novel iterative self-prompting framework that leverages the intrinsic geometry of predicted masks for continual refinement. We redefine affordance detection as a language-conditioned segmentation task: given a 3D point cloud and language instruction, our model predicts a sequence of refined affordance masks, each guided by differential geometric feedback including <strong>Laplacians</strong>, <strong>normal derivatives</strong>, and <strong>curvature fields</strong>. This feedback is encoded into visual prompts that drive a multi-stage refinement decoder, enabling the model to self-correct and adapt to complex spatial structures. 
+            </p>
+            <p>
+              To further enhance precision and coherence, we introduce <strong>Implicit Neural Affordance Fields (INAFS)</strong>, which define continuous probabilistic regions over the 3D surface without additional supervision. Additionally, our <strong>Spectral Convolutional Self-Prompting (SCSP)</strong> module operates in the frequency domain of the point cloud, enabling multi-scale refinement that captures both coarse and fine affordance structures. Extensive experiments demonstrate that ViSPLA achieves state-of-the-art results on both seen and unseen objects on two benchmark datasets.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Section -->
+  <section class="section method-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Methodology</h2>
+          <div class="content has-text-centered">
+            
+            <!-- METHOD DIAGRAM -->
+            <!-- Replace 'src' with your diagram file path -->
+            <img class="responsive-img" style="max-width: 900px;" src="imgs/Neurips-overall.png" alt="Method Overview">
+            
+            <p class="mt-4">
+              The ViSPLA framework consists of three core components that work in a closed-loop refinement cycle:
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <!-- Component 1 -->
+        <div class="column is-one-third">
+          <div class="method-card">
+            <div class="has-text-centered mb-3">
+              <span class="icon is-large has-text-primary">
+                <i class="fas fa-cube fa-2x"></i>
+              </span>
+            </div>
+            <h4 class="title is-5 has-text-centered">IDGSP</h4>
+            <p>
+              <strong>Iterative Differential Geometry-based Self-Prompting</strong> extracts geometric descriptors (Laplacian, Mean Curvature, Normal Derivatives) from the current mask prediction. These act as "visual prompts" for the next iteration, correcting geometric inconsistencies.
+            </p>
+          </div>
+        </div>
+
+        <!-- Component 2 -->
+        <div class="column is-one-third">
+          <div class="method-card">
+            <div class="has-text-centered mb-3">
+              <span class="icon is-large has-text-info">
+                <i class="fas fa-wave-square fa-2x"></i>
+              </span>
+            </div>
+            <h4 class="title is-5 has-text-centered">INAFS</h4>
+            <p>
+              <strong>Implicit Neural Affordance Fields</strong> learn a continuous probabilistic occupancy function over the 3D surface. This self-supervised module enforces smoothness and topological consistency, filling in gaps left by discrete point sampling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Component 3 -->
+        <div class="column is-one-third">
+          <div class="method-card">
+            <div class="has-text-centered mb-3">
+              <span class="icon is-large has-text-warning">
+                <i class="fas fa-chart-area fa-2x"></i>
+              </span>
+            </div>
+            <h4 class="title is-5 has-text-centered">SCSP</h4>
+            <p>
+              <strong>Spectral Convolutional Self-Prompting</strong> operates in the frequency domain of the point cloud graph. It separates coarse shapes from fine details, ensuring multi-scale refinement for complex affordance structures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="section results-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+      
+      <!-- Quantitative -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content">
+            <p>
+              We evaluated ViSPLA on the <strong>LASO</strong> and <strong>PIAD</strong> datasets. Our method achieves State-of-the-Art performance, significantly outperforming baselines like GEAL and 3D-AffordanceLLM, particularly in zero-shot (unseen) settings.
+            </p>
+            <div class="table-container">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Dataset</th>
+                    <th>aIoU (%)</th>
+                    <th>AUC (%)</th>
+                    <th>SIM</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>GEAL (CVPR'24)</td>
+                    <td>PIAD (Seen)</td>
+                    <td>22.5</td>
+                    <td>85.0</td>
+                    <td>0.601</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ViSPLA (Ours)</strong></td>
+                    <td><strong>PIAD (Seen)</strong></td>
+                    <td><strong>23.1</strong></td>
+                    <td><strong>85.8</strong></td>
+                    <td><strong>0.664</strong></td>
+                  </tr>
+                  <tr>
+                    <td>GEAL (CVPR'24)</td>
+                    <td>LASO (Unseen)</td>
+                    <td>16.7</td>
+                    <td>80.9</td>
+                    <td>0.567</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ViSPLA (Ours)</strong></td>
+                    <td><strong>LASO (Unseen)</strong></td>
+                    <td><strong>17.1</strong></td>
+                    <td><strong>81.5</strong></td>
+                    <td><strong>0.571</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Comparison Placeholder -->
+      <div class="columns is-centered mt-5">
+        <div class="column is-full has-text-centered">
+          <h3 class="title is-4">Qualitative Results</h3>
+          <p class="mb-4"><i>Drag the slider for additional results</i></p>
+          
+          <div class="comparison-container" id="image-compare">
+             <!-- COMPARISON IMAGES -->
+             <!-- 1. LEFT IMAGE (Baseline/Before) -->
+             <img src="imgs/Result_comparison.png" alt="Comparison with baseline">
+             
+             <!-- 2. RIGHT IMAGE (Ours/After) -->
+             <img src="imgs/iterations.png" alt="Iterative refinement">
+
+             <img src="imgs/Ablation-qualitative.png" alt="Ablation visuals">
+          </div>
+          <p class="is-size-7 mt-2">
+            *Visualizes improved boundary adherence and reduced noise in ViSPLA predictions.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BibTeX Section -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3">BibTeX</h2>
+      <div class="bibtex-section">
+<pre><code>@inproceedings{basak2025vispla,
+  title={ViSPLA: Visual Iterative Self-Prompting for Language-Guided 3D Affordance Learning},
+  author={Basak, Hritam and Yin, Zhaozheng},
+  booktitle={Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS)},
+  year={2025}
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>ViSPLA</strong> by Hritam Basak and Zhaozheng Yin.<br>
+          Department of Computer Science, Stony Brook University.<br>
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+        </p>
+        <p class="is-size-7">
+          Website template adapted from <a href="https://nerfies.github.io/">Nerfies</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/image-compare-viewer/dist/image-compare-viewer.min.js"></script>
+  
+  <script>
+    // Initialize Image Compare Viewer
+    const element = document.getElementById("image-compare");
+    const viewer = new ImageCompare(element).mount();
+    
+    // Smooth scrolling for links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+  </script>
+
+</body>
+</html>
