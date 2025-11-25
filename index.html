@@ -17,9 +17,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
-  <!-- Image Compare Viewer CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/image-compare-viewer/dist/image-compare-viewer.min.css">
-
   <style>
     body {
       font-family: 'Noto Sans', sans-serif;
@@ -129,6 +126,17 @@
     
     .teaser-img {
       max-width: 800px; /* Limits teaser width specifically */
+    }
+
+    /* Tab Content Animation */
+    .content-tab {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
   </style>
@@ -364,25 +372,54 @@
         </div>
       </div>
 
-      <!-- Interactive Comparison Placeholder -->
+      <!-- Qualitative Results Toggle Section -->
       <div class="columns is-centered mt-5">
         <div class="column is-full has-text-centered">
           <h3 class="title is-4">Qualitative Results</h3>
-          <p class="mb-4"><i>Drag the slider for additional results</i></p>
-          
-          <div class="comparison-container" id="image-compare">
-             <!-- COMPARISON IMAGES -->
-             <!-- 1. LEFT IMAGE (Baseline/Before) -->
-             <img src="imgs/Result_comparison.png" alt="Comparison with baseline">
-             
-             <!-- 2. RIGHT IMAGE (Ours/After) -->
-             <img src="imgs/iterations.png" alt="Iterative refinement">
+          <p class="mb-4"><i>Click the buttons below to toggle between different results</i></p>
 
-             <img src="imgs/Ablation-qualitative.png" alt="Ablation visuals">
+          <!-- Toggle Tabs -->
+          <div class="tabs is-toggle is-toggle-rounded is-centered">
+            <ul>
+              <li class="is-active" onclick="openTab(event, 'result-comparison')">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-check-circle"></i></span>
+                  <span>Baseline Comparison</span>
+                </a>
+              </li>
+              <li onclick="openTab(event, 'result-iterations')">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-layer-group"></i></span>
+                  <span>Iterative Process</span>
+                </a>
+              </li>
+              <li onclick="openTab(event, 'result-ablation')">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-microscope"></i></span>
+                  <span>Ablation Study</span>
+                </a>
+              </li>
+            </ul>
           </div>
-          <p class="is-size-7 mt-2">
-            *Visualizes improved boundary adherence and reduced noise in ViSPLA predictions.
-          </p>
+
+          <!-- Tab 1: Comparison -->
+          <div id="result-comparison" class="content-tab" style="display:block;">
+             <img src="imgs/Result_comparison.png" class="responsive-img" alt="Comparison with baseline" style="max-width: 800px;">
+             <p class="mt-2"><b>Comparison with State-of-the-Art:</b> ViSPLA provides sharper boundary adherence compared to GEAL.</p>
+          </div>
+
+          <!-- Tab 2: Iterations -->
+          <div id="result-iterations" class="content-tab" style="display:none;">
+             <img src="imgs/iterations.png" class="responsive-img" alt="Iterative refinement" style="max-width: 800px;">
+             <p class="mt-2"><b>Iterative Refinement:</b> Visualizing how the affordance mask improves over T steps.</p>
+          </div>
+
+          <!-- Tab 3: Ablation -->
+          <div id="result-ablation" class="content-tab" style="display:none;">
+             <img src="imgs/Ablation-qualitative.png" class="responsive-img" alt="Ablation visuals" style="max-width: 800px;">
+             <p class="mt-2"><b>Ablation Study:</b> Impact of removing IDGSP, INAFS, or SCSP modules on final quality.</p>
+          </div>
+
         </div>
       </div>
 
@@ -422,13 +459,28 @@
 
   <!-- Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://unpkg.com/image-compare-viewer/dist/image-compare-viewer.min.js"></script>
   
   <script>
-    // Initialize Image Compare Viewer
-    const element = document.getElementById("image-compare");
-    const viewer = new ImageCompare(element).mount();
-    
+    // Tab Switching Logic
+    function openTab(evt, tabName) {
+      // Hide all tab content
+      var i, x, tablinks;
+      x = document.getElementsByClassName("content-tab");
+      for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+      }
+      
+      // Remove is-active class from all tabs
+      tablinks = document.querySelectorAll(".tabs ul li");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].classList.remove("is-active");
+      }
+      
+      // Show the current tab and add is-active class
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("is-active");
+    }
+
     // Smooth scrolling for links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
